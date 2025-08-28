@@ -1,0 +1,11 @@
+package api
+
+import "github.com/gorilla/mux"
+
+func RegisterRoutes(r *mux.Router) {
+	// Income endpoints
+	r.HandleFunc("/income", AddIncome).Methods("POST")
+	r.HandleFunc("/income", GetIncome).Methods("GET")
+
+	// TODO: Add /expenses and /goals later
+}
