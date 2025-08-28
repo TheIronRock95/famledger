@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/TheIronRock95/famledger/backend/internal/api"
-	"github.com/TheIronRock95/famledger/backend/internal/db"
+	"github.com/TheIronRock95/famledger/internal/api"
+	"github.com/TheIronRock95/famledger/internal/db"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
