@@ -11,5 +11,7 @@ func RegisterRoutes(r *mux.Router) {
 	r.HandleFunc("/expenses", AddExpense).Methods("POST")
 	r.HandleFunc("/expenses", GetExpenses).Methods("GET")
 
-	// TODO: Add /goals later
+	// Goals endpoints
+	r.HandleFunc("/goal", AddGoal).Methods("POST")
+	r.HandleFunc("/goals", GetGoals).Methods("GET")
 }
