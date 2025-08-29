@@ -7,7 +7,7 @@ import (
 	"github.com/TheIronRock95/famledger/internal/db"
 )
 
-// AddIncome adds a new income entry, letting the DB generate id and created_at
+// AddIncome handler
 func AddIncome(w http.ResponseWriter, r *http.Request) {
 	var inc struct {
 		UserID string  `json:"user_id"`
@@ -20,13 +20,7 @@ func AddIncome(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Insert only the fields that exist in the table
-	var result interface{}
-	err := db.Supabase.DB.From("income").Insert(map[string]interface{}{
-		"user_id": inc.UserID,
-		"source":  inc.Source,
-		"amount":  inc.Amount,
-	}).Execute(&result)
+	result, err := db.AddIncomeRecord(inc.UserID, inc.Source, inc.Amount)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -35,11 +29,9 @@ func AddIncome(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(result)
 }
 
-// GetIncome retrieves all income entries
+// GetIncome handler
 func GetIncome(w http.ResponseWriter, r *http.Request) {
-	var income []map[string]interface{}
-
-	err := db.Supabase.DB.From("income").Select("*").Execute(&income)
+	income, err := db.GetIncomeRecords()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

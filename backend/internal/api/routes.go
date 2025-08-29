@@ -7,5 +7,9 @@ func RegisterRoutes(r *mux.Router) {
 	r.HandleFunc("/income", AddIncome).Methods("POST")
 	r.HandleFunc("/income", GetIncome).Methods("GET")
 
-	// TODO: Add /expenses and /goals later
+	// Expenses endpoints
+	r.HandleFunc("/expenses", AddExpense).Methods("POST")
+	r.HandleFunc("/expenses", GetExpenses).Methods("GET")
+
+	// TODO: Add /goals later
 }
